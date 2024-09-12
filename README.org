@@ -5,6 +5,11 @@ This package provides a major mode, ~jira-markdown~, which can be with ~ob-jira-
 Source blocks of the ~jira-markdown~ type can then be used to create and edit Jira issues via org-babel's source block execution functionality.
 ** Status
 This package is an early draft, and should be considered to be alpha quality; feel free to use it, but it is subject to change! 😅
+** Installation
+This package is not yet on MELPA, but can be installed locally with:
+#+begin_src elisp
+(use-package ob-jira-markdown :ensure t :load-path "/path/to/ob-jira-markdown.el/")
+#+end_src
 ** Usage
 *** Creating Jira issues
 Jira issues can be created directly from ~jira-markdown~ source blocks by executing them as follows:
