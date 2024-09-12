@@ -11,8 +11,8 @@ Jira issues can be created directly from ~jira-markdown~ source blocks by execut
 
 #+begin_src org
 ,#+begin_src jira-markdown :command create :execute cli :title test issue
-,# hello world
-,this is a test
+# hello world
+this is a test
 ,#+end_src
 #+end_src
 
@@ -22,8 +22,8 @@ Issues can be edited as follows:
 
 #+begin_src org
 ,#+begin_src jira-markdown :command edit :execute cli :title test issue :issue abc-123
-,# hello world
-,this is a test
+# hello world
+this is a test
 ,#+end_src
 #+end_src
 *** Header arguments
