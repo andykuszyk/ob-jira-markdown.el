@@ -3,6 +3,8 @@
 This package provides a major mode, ~jira-markdown~, which can be with ~ob-jira-markdown~ to create and edit Jira issues. The ~jira-markdown~ mode identifies a buffer's contents as containing markup for a Jira issue, although the mode itself simply derives from ~markdown-mode~.
 
 Source blocks of the ~jira-markdown~ type can then be used to create and edit Jira issues via org-babel's source block execution functionality.
+** Status
+This package is an early draft, and should be considered to be alpha quality; feel free to use it, but it is subject to change! 😅
 ** Usage
 *** Creating Jira issues
 Jira issues can be created directly from ~jira-markdown~ source blocks by executing them as follows:
@@ -24,3 +26,9 @@ this is a test
 The following header arguments are supported:
 
 - :command :: Controls whether issues are created or edited. Valid values are ~create~ and ~edit~.
+- :execute :: Controls whether the Jira CLI command should be executed, or outputted as a script. Valid values are ~cli~ to execute the command, and ~script~ to output the script. Use ~script~ if you want to preview the CLI command before executing it with ~cli~.
+- :title :: The title of the Jira issue.
+- :issue :: The issue key of the issue. Required for ~:command edit~, and must be omitted for ~:command create~.
+- :parent :: Optionally, the key of the issue to use as the parent issue.
+- :project :: Optionally, the non-default project to create the issue in.
+- :type :: They type of issue to create, e.g. ~Story~.
