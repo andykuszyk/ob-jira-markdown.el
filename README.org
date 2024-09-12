@@ -8,7 +8,11 @@ This package is an early draft, and should be considered to be alpha quality; fe
 ** Installation
 This package is not yet on MELPA, but can be installed locally with:
 #+begin_src elisp
-(use-package ob-jira-markdown :ensure t :load-path "/path/to/ob-jira-markdown.el/")
+(use-package ob-jira-markdown
+  :ensure t
+  :load-path "/path/to/ob-jira-markdown.el/"
+  :custom
+  (ob-jira-markdown-host "https://your-org.atlassian.net"))
 #+end_src
 ** Usage
 *** Creating Jira issues
@@ -41,3 +45,5 @@ The following header arguments are supported:
 - :parent :: Optionally, the key of the issue to use as the parent issue.
 - :project :: Optionally, the non-default project to create the issue in.
 - :type :: They type of issue to create, e.g. ~Story~.
+*** Opening issues in a browser
+If point is on a source block that has the ~:issue~ header argument set, the command ~ob-jira-markdown-open-in-browser~ can be used interactively to open the issue in a web browser. The custom variable ~ob-jira-markdown-host~ must be set to the address of your Jira installation for this to work correctly.

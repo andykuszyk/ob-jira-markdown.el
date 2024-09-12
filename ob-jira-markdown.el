@@ -90,5 +90,33 @@
   "Replace special characters in BODY ready for CLI execution."
   (string-replace "%" "%%" (string-replace "'" "'\"'\"'" body)))
 
+(defcustom ob-jira-markdown-host
+  nil
+  "The URL of the Jira host to use when formatting issue URLs.")
+
+(defun ob-jira-markdown-open-in-browser ()
+  "Open the Jira issue associated with the current source block in a browser.
+
+This function opens the Jira issue associated with the current \"org-mode\"
+source block based on its :issue header argument.
+
+For example, if this function was invoked on the source block below, issue
+EMX-123 would be opened in the system`s default web browser:
+
+  #+begin_src markdown :issue EMX-123
+  Emacs rocks!
+  #+end_src
+
+The URL of the Jira issue is constructed using the `ob-jira-markdown-host`
+  variable."
+  (interactive)
+  (let* ((src-block-info (org-babel-get-src-block-info))
+	 (issue (cdr (assoc :issue (nth 2 src-block-info)))))
+    (if (not issue)
+	(error "Jira issue could not be found!")
+      (let ((url (format "%s/browse/%s" ob-jira-markdown-host issue)))
+	(message (format "opening issue in browser: %s" url))
+	(browse-url url)))))
+
 (provide 'ob-jira-markdown)
 ;;; ob-jira-markdown.el ends here
