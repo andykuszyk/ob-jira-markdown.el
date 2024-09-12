@@ -23,4 +23,4 @@ this is a test
 *** Header arguments
 The following header arguments are supported:
 
-:command:: Controls whether issues are created or edited. Valid values are ~create~ and ~edit~.
+- ~:command~ :: Controls whether issues are created or edited. Valid values are ~create~ and ~edit~.
