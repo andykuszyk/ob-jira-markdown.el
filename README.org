@@ -1,0 +1,26 @@
+* ob-jira-markdown
+** About
+This package provides a major mode, ~jira-markdown~, which can be with ~ob-jira-markdown~ to create and edit Jira issues. The ~jira-markdown~ mode identifies a buffer's contents as containing markup for a Jira issue, although the mode itself simply derives from ~markdown-mode~.
+
+Source blocks of the ~jira-markdown~ type can then be used to create and edit Jira issues via org-babel's source block execution functionality.
+** Usage
+*** Creating Jira issues
+Jira issues can be created directly from ~jira-markdown~ source blocks by executing them as follows:
+
+#+begin_src jira-markdown :command create :execute cli :title test issue
+# hello world
+this is a test
+#+end_src
+
+In this example, a new issue is created with the title "test issue", and the contents of the source block.
+*** Editing Jira issues
+Issues can be edited as follows:
+
+#+begin_src jira-markdown :command edit :execute cli :title test issue :issue abc-123
+# hello world
+this is a test
+#+end_src
+*** Header arguments
+The following header arguments are supported:
+
+:command:: Controls whether issues are created or edited. Valid values are ~create~ and ~edit~.
