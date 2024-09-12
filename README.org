@@ -9,23 +9,23 @@ This package is an early draft, and should be considered to be alpha quality; fe
 *** Creating Jira issues
 Jira issues can be created directly from ~jira-markdown~ source blocks by executing them as follows:
 
-#+begin_example
-#+begin_src jira-markdown :command create :execute cli :title test issue
-# hello world
-this is a test
+#+begin_src org
+,#+begin_src jira-markdown :command create :execute cli :title test issue
+,# hello world
+,this is a test
+,#+end_src
 #+end_src
-#+end_example
 
 In this example, a new issue is created with the title "test issue", and the contents of the source block.
 *** Editing Jira issues
 Issues can be edited as follows:
 
-#+begin_example
-#+begin_src jira-markdown :command edit :execute cli :title test issue :issue abc-123
-# hello world
-this is a test
+#+begin_src org
+,#+begin_src jira-markdown :command edit :execute cli :title test issue :issue abc-123
+,# hello world
+,this is a test
+,#+end_src
 #+end_src
-#+end_example
 *** Header arguments
 The following header arguments are supported:
 
