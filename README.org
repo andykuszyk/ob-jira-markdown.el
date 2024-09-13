@@ -9,7 +9,6 @@ This package is an early draft, and should be considered to be alpha quality; fe
 This package is not yet on MELPA, but can be installed locally with:
 #+begin_src elisp
 (use-package ob-jira-markdown
-  :ensure t
   :load-path "/path/to/ob-jira-markdown.el/"
   :custom
   (ob-jira-markdown-host "https://your-org.atlassian.net")
