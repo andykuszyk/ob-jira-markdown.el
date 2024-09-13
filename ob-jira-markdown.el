@@ -1,4 +1,4 @@
-;;; ob-jira-markdown.el --- org-babel functions for jira-cli evaluation -*-lexical-binding:t; ispell-buffer-session-localwords: ("jira" "src" "emx-); -*-
+;;; ob-jira-markdown.el --- org-babel functions for jira-cli evaluation -*- lexical-binding:t; ispell-buffer-session-localwords: ("jira" "src" "emx-); -*-
 
 ;; Copyright (C) 2024 Andy Kuszyk
 
@@ -94,25 +94,25 @@
 	 (t
 	  (error ":execute must be \"cli\" or \"script\"")))))
      ((string= command "edit")
-       (if (not issue)
-	   (error ":issue must be set to edit an issue"))
-       (let ((jira-cli-cmd (format
-			    "jira issue edit %s %s%s--no-input -b '%s'"
-			    issue
-			    (if title (format "-s '%s' " title) "")
-			    (if project (format "-p '%s' " project) "")
-			    (ob-jira-markdown--clean-src-body body))))
-	 (cond
-	  ((string= execute "cli")
-	   (let ((updated-jira-cli-issue
-		  (ob-jira-markdown--parse-issue-reference
-		   (shell-command-to-string jira-cli-cmd))))
-	     (message (format "Updated Jira issue: %s"
-			      updated-jira-cli-issue))))
-	  ((string= execute "script")
-	   jira-cli-cmd)
-	  (t
-	   (error ":execute must be \"cli\" or \"script\"")))))
+      (if (not issue)
+	  (error ":issue must be set to edit an issue"))
+      (let ((jira-cli-cmd (format
+			   "jira issue edit %s %s%s--no-input -b '%s'"
+			   issue
+			   (if title (format "-s '%s' " title) "")
+			   (if project (format "-p '%s' " project) "")
+			   (ob-jira-markdown--clean-src-body body))))
+	(cond
+	 ((string= execute "cli")
+	  (let ((updated-jira-cli-issue
+		 (ob-jira-markdown--parse-issue-reference
+		  (shell-command-to-string jira-cli-cmd))))
+	    (message (format "Updated Jira issue: %s"
+			     updated-jira-cli-issue))))
+	 ((string= execute "script")
+	  jira-cli-cmd)
+	 (t
+	  (error ":execute must be \"cli\" or \"script\"")))))
      (t
       (error ":command must be \"create\" or \"edit\"")))))
 
