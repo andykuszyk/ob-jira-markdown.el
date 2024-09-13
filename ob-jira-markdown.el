@@ -1,4 +1,4 @@
-;;; ob-jira-markdown.el --- org-babel functions for jira-cli evaluation -*- lexical-binding:t; ispell-buffer-session-localwords: ("jira" "src" "emx-"); -*-
+;;; ob-jira-markdown.el --- Org-babel functions for jira-cli evaluation -*- lexical-binding:t; ispell-buffer-session-localwords: ("jira" "src" "emx"); -*-
 
 ;; Copyright (C) 2024 Andy Kuszyk
 
@@ -24,7 +24,7 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; org-babel support for creating, viewing, and editing Jira issues via the Jira
+;; Org-babel support for creating, viewing, and editing Jira issues via the Jira
 ;; CLI: https://github.com/ankitpokhrel/jira-cli
 
 ;;; Code:
@@ -32,7 +32,7 @@
 (require 'ob-ref)
 (require 'ob-comint)
 (require 'ob-eval)
-(require 'markdown-mode)
+(require 'jira-markdown-mode)
 
 (defgroup ob-jira-markdown
   nil
@@ -44,9 +44,6 @@
   nil
   "The URL of the Jira host to use when formatting issue URLs."
   :type 'string)
-
-(define-derived-mode jira-markdown-mode markdown-mode "jira-markdown"
-  "A major mode for editing Jira markup using Markdown.")
 
 (defvar org-babel-default-header-args:jira-markdown
   '((:results . "output"))
@@ -61,8 +58,7 @@
 	(project (cdr (assoc :project params)))
 	(parent (cdr (assoc :parent params)))
 	(command (cdr (assoc :command params)))
-	(execute (cdr (assoc :execute params)))
-	)
+	(execute (cdr (assoc :execute params))))
     (cond
      ((string= command "create")
       (if issue
