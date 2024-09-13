@@ -12,7 +12,9 @@ This package is not yet on MELPA, but can be installed locally with:
   :ensure t
   :load-path "/path/to/ob-jira-markdown.el/"
   :custom
-  (ob-jira-markdown-host "https://your-org.atlassian.net"))
+  (ob-jira-markdown-host "https://your-org.atlassian.net")
+  :bind (("C-x j o" . ob-jira-markdown-open-in-browser)
+	 ("C-x j w" . ob-jira-markdown-kill-issue)))
 #+end_src
 The variable ~ob-jira-markdown-host~ can be customised to make enable opening the issue for source blocks in a browser, but isn't required for the main functionality of ~ob-jira-markdown~.
 ** Requirements
@@ -50,5 +52,12 @@ The following header arguments are supported:
 - :type :: They type of issue to create, e.g. ~Story~.
 *** Opening issues in a browser
 If point is on a source block that has the ~:issue~ header argument set, the command ~ob-jira-markdown-open-in-browser~ can be used interactively to open the issue in a web browser. The custom variable ~ob-jira-markdown-host~ must be set to the address of your Jira installation for this to work correctly.
+*** Killing the issue reference of the current source block
+A useful command is included in this package to add the issue reference of the source block at point to the kill ring: ~ob-jira-markdown-kill-issue~.
+** Related projects
+- [[https://github.com/andykuszyk/jira-cli.el][jira-cli.el]]
+- [[https://www.emacswiki.org/emacs/jira.el][jira.el]]
+- [[https://github.com/ahungry/org-jira][org-jira]]
+- [[https://github.com/nyyManni/ejira][ejira]]
 ** Contributions
 Contributions are very welcome! Please feel free to fork this repo, and raise a PR 🙏

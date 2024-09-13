@@ -143,5 +143,25 @@ The URL of the Jira issue is constructed using the `ob-jira-markdown-host`
 	(message (format "opening issue in browser: %s" url))
 	(browse-url url)))))
 
+(defun ob-jira-markdown-kill-issue ()
+  "Kill the issue key of the current source block to the kill ring.
+
+When invoked on a source block with the :issue header argument, this function
+will add the issue key to the kill ring.
+
+For example, if called on the source block below, \"EMX-123\" would be added to
+the kill ring:
+
+  #+begin_src markdown :issue EMX-123
+  Plain text for the win!
+  #+end_src"
+  (interactive)
+  (let* ((src-block-info (org-babel-get-src-block-info))
+	 (jira-cli-issue (cdr (assoc :issue (nth 2 src-block-info)))))
+    (if (not jira-cli-issue)
+	(error "Jira issue could not be found!")
+      (message (format "killed reference: %s" jira-cli-issue))
+      (kill-new jira-cli-issue))))
+
 (provide 'ob-jira-markdown)
 ;;; ob-jira-markdown.el ends here
