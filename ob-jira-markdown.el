@@ -1,4 +1,4 @@
-;;; ob-jira-markdown.el --- Org-babel functions for jira-cli evaluation -*- lexical-binding:t; ispell-buffer-session-localwords: ("jira" "src" "emx"); -*-
+;;; ob-jira-markdown.el --- Org-babel functions for jira-cli evaluation -*- lexical-binding:t; ispell-buffer-session-localwords: ("JIRA" "SRC" "EMX"); -*-
 
 ;; Copyright (C) 2024 Andy Kuszyk
 
