@@ -1,4 +1,4 @@
-;;; ob-jira-markdown.el --- org-babel functions for jira-cli evaluation -*- lexical-binding:t; ispell-buffer-session-localwords: (); -*-
+;;; ob-jira-markdown.el --- org-babel functions for jira-cli evaluation -*-lexical-binding:t; ispell-buffer-session-localwords: ("jira" "src" "emx-); -*-
 
 ;; Copyright (C) 2024 Andy Kuszyk
 
@@ -6,7 +6,7 @@
 ;; URL: https://github.com/andykuszyk/ob-jira-markdown.el
 ;; Version: 0.1
 ;; Keywords: org-babel
-;; Package-Requires: ((emacs "29.1") ob ob-ref ob-comint ob-eval markdown-mode)
+;; Package-Requires: ((emacs "29.1") markdown-mode)
 
 ;; This file is not part of GNU Emacs.
 
@@ -34,12 +34,23 @@
 (require 'ob-eval)
 (require 'markdown-mode)
 
+(defgroup ob-jira-markdown
+  nil
+  "Variables for the ob-jira-markdown package."
+  :group 'applications
+  :prefix "ob-jira-markdown")
+
+(defcustom ob-jira-markdown-host
+  nil
+  "The URL of the Jira host to use when formatting issue URLs."
+  :type 'string)
+
 (define-derived-mode jira-markdown-mode markdown-mode "jira-markdown"
   "A major mode for editing Jira markup using Markdown.")
 
 (defvar org-babel-default-header-args:jira-markdown
   '((:results . "output"))
-  "Default arguments for evaluatiing a Jira Markdown source block.")
+  "Default arguments for evaluating a Jira Markdown source block.")
 
 (defun org-babel-execute:jira-markdown (body params)
   "Create or edit a Jira issue based on a BODY and PARAMS in a source block."
@@ -114,10 +125,6 @@
 (defun ob-jira-markdown--clean-src-body (body)
   "Replace special characters in BODY ready for CLI execution."
   (string-replace "%" "%%" (string-replace "'" "'\"'\"'" body)))
-
-(defcustom ob-jira-markdown-host
-  nil
-  "The URL of the Jira host to use when formatting issue URLs.")
 
 (defun ob-jira-markdown-open-in-browser ()
   "Open the Jira issue associated with the current source block in a browser.
