@@ -1,4 +1,4 @@
-* ob-jira-markdown
+* ob-jira-markdown.el
 ** About
 This package provides a major mode, ~jira-markdown~, which can be with ~ob-jira-markdown~ to create and edit Jira issues. The ~jira-markdown~ mode identifies a buffer's contents as containing markup for a Jira issue, although the mode itself simply derives from ~markdown-mode~.
 
