@@ -1,8 +1,31 @@
-;;; ob-jira-markdown.el --- org-babel functions for jira-cli evaluation
+;;; ob-jira-markdown.el --- org-babel functions for jira-cli evaluation -*- lexical-binding:t; ispell-buffer-session-localwords: (); -*-
+
+;; Copyright (C) 2024 Andy Kuszyk
+
+;; Author: Andy Kuszyk <emacs@akuszyk.com>
+;; URL: https://github.com/andykuszyk/ob-jira-markdown.el
+;; Version: 0.1
+;; Keywords: org-babel
+;; Package-Requires: ((emacs "29.1") ob ob-ref ob-comint ob-eval markdown-mode)
+
+;; This file is not part of GNU Emacs.
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
 ;; org-babel support for creating, viewing, and editing Jira issues via the Jira
-;; CLI.
+;; CLI: https://github.com/ankitpokhrel/jira-cli
 
 ;;; Code:
 (require 'ob)
@@ -19,7 +42,7 @@
   "Default arguments for evaluatiing a Jira Markdown source block.")
 
 (defun org-babel-execute:jira-markdown (body params)
-  "Execute a block of Jira-Cli code with org-babel with BODY based on PARAMS."
+  "Create or edit a Jira issue based on a BODY and PARAMS in a source block."
   (let (
 	(issue (cdr (assoc :issue params)))
 	(title (cdr (assoc :title params)))
@@ -43,6 +66,7 @@
 	      title
 	      (if type type "Story")
 	      (ob-jira-markdown--clean-src-body body))))
+	(message (format "creating issue with the command: %s" jira-cli-cmd))
 	(cond
 	 ((string= execute "cli")
 	  (let ((new-jira-cli-issue
@@ -54,6 +78,7 @@
 		      new-jira-cli-issue))
 	    new-jira-cli-issue))
 	 ((string= execute "script")
+	  (message "returning script")
 	  jira-cli-cmd)
 	 (t
 	  (error ":execute must be \"cli\" or \"script\"")))))
