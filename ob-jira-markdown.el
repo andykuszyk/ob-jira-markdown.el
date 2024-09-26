@@ -109,6 +109,18 @@
 	  jira-cli-cmd)
 	 (t
 	  (error ":execute must be \"cli\" or \"script\"")))))
+     ((string= command "view")
+      (if (not issue)
+	  (error ":issue must be set to view an issue"))
+      (let ((jira-cli-cmd
+	     (format "jira issue view %s" issue)))
+	(cond
+	 ((string= execute "cli")
+	  (shell-command-to-string jira-cli-cmd))
+	 ((string= execute "script")
+	  jira-cli-cmd)
+	 (t
+	  (error ":issue must be set to view an issue")))))
      (t
       (error ":command must be \"create\" or \"edit\"")))))
 
